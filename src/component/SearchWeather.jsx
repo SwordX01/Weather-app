@@ -20,32 +20,19 @@ export default function Searchweather() {
             componentMounted = false;
         };
     }, [search]);
-    /*useEffect(() => {
-        if (search) {
-            fetch(
-                `http://api.timezonedb.com/v2.1/get-time-zone?key=YOUR_API_KEY&format=json&by=city&city=${search}`
-            )
-                .then((response) => response.json())
-                .then((data) => {
-                    setTime(data.formatted);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
-    }, [search]);*/
+
 
     let emoji = null
     if (typeof data.main != "undefined") {
-        if (data.weather[0].main == 'Clouds') {
+        if (data.weather[0].main === 'Clouds') {
             emoji = "fa-cloud"
-        } else if (data.weather[0].main == "Thunderstorm") {
+        } else if (data.weather[0].main === "Thunderstorm") {
             emoji = "fa-bolt"
-        } else if (data.weather[0].main == "Drizzle") {
+        } else if (data.weather[0].main === "Drizzle") {
             emoji = "fa-cloud-rain"
-        } else if (data.weather[0].main == "Rain") {
+        } else if (data.weather[0].main === "Rain") {
             emoji = "fa-cloud-shower-heavy"
-        } else if (data.weather[0].main == "Snow") {
+        } else if (data.weather[0].main === "Snow") {
             emoji = "fa-snow-flake"
         } else {
             emoji = "fa-smog"
@@ -76,9 +63,9 @@ export default function Searchweather() {
     return (
 
         <div>
-            <div class="container mt-5">
+            <div class="container mt-8">
                 <div class="row justify-content-center">
-                    <div class='col-md-4'>
+                    <div class='col-md-6'>
                         <div class="card text-white text-center border-0" >
                             <img src={`https://source.unsplash.com/600x900/?${data.weather[0].main}`}
                                 class="card-img"
@@ -111,6 +98,22 @@ export default function Searchweather() {
                                     <h1 className='fw-bolder mb-5'>{temp} &deg;C</h1>
                                     <p className='lead fw-bolder mb-0'>{data.weather[0].main}</p>
                                     <p className='lead'> {temp_max}&deg;C | {temp_min}&deg;C</p>
+                                </div>
+                                <div className="box_container">
+                                    <div className="box">
+                                        <p>Humidity</p>
+                                        <h1>{data.main.humidity.toFixed()}%</h1>
+                                    </div>
+
+                                    <div className="box">
+                                        <p>Wind</p>
+                                        <h1>{data.wind.speed.toFixed()} km/h</h1>
+                                    </div>
+
+                                    <div className="box">
+                                        <p>Feels Like</p>
+                                        <h1>{data.main.feels_like.toFixed()} °C</h1>
+                                    </div>
                                 </div>
                             </div>
                         </div>
